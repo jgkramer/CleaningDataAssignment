@@ -29,7 +29,7 @@ if(!file.exists("./UCI HAR Dataset")){
 
 ### 1. Merge the training set and test set to create one data set. 
 
-**run_analysis.R** begins by loading in the training and test data.  First, the X values represent, for each observation from the phone data set, the values from each of 561 features in the data set.  The training set and test set are merged into a single data set.  Note that in this merged set are 10,299 observations (rows) in this data set. 
+The real work of **run_analysis.R** begins by loading in the training and test data.  First, the X values represent, for each observation from the Samsung phone data set, the values from each of 561 features in the data set.  The training set and test set are merged into a single data set.  Note that in this merged set are 10,299 observations (rows) in this data set. 
 
 ```{r message = FALSE, warning = FALSE}
 X_train <- read.table("./UCI HAR Dataset/train/X_train.txt")
@@ -95,7 +95,7 @@ Note that this process reduces the dimensionality of the data set to 66 mean / s
 
 The script then moves on to read in **activities.txt**, which contains a mapping of the numerical labels in the *Y* data files to an english language description of an activity. 
 
-I then replace the underscore of these decsriptions with spaces, and convert them to lowercase, to make them more human-readable (i.e., "walking downstairs" instead of "WALKING_DOWNSTAIRS").    Note that this process sets up to complete item #3 of the assignment (*use descriptive activity names to name the activities in the data set*) -- these descriptive names will later be assigned to the corresponding row in the data set. 
+I then replace the underscore of these decsriptions with spaces, and convert them to lowercase, to make them more human-readable (i.e., "walking downstairs" instead of "WALKING_DOWNSTAIRS").  
 
 ```{r message = FALSE, warning = FALSE}
 activities <- read.table("./UCI HAR Dataset/activity_labels.txt")
@@ -111,7 +111,39 @@ Note, I used join instead of merge, because the former preserves the ordering of
 y_labeled <- left_join(x = y_merged, y = activities, by = "activity_id")
 ```
 
+Note that these descriptive names will later be assigned to the corresponding row in the data set based on their "y" numerical labels. 
 
-### 4. Appropriately labels the data set with descriptive variable names.
+### 4. Appropriately label the data set with descriptive variable names.
+
+The next section of the script manipulates the text of the feature labels to make them more descriptive. 
+As we did with the columns of the "X" data set, I extract only the 66 rows from the feature table representing mean or standard deviations. 
+
+```{r message = FALSE, warning = FALSE}
+
+variable_labels <- features[means_and_stds, 2]
+```
 
 
+
+variable_labels <- gsub("^(.*)-mean\\(\\)$", "Mean of \\1", variable_labels)
+variable_labels <- gsub("^(.*)-std\\(\\)$", "Std. dev. of \\1", variable_labels)
+variable_labels <- gsub("^(.*)-mean\\(\\)-([XYZ])$", "Mean of \\1 - \\2 direction", variable_labels)
+variable_labels <- gsub("^(.*)-std\\(\\)-([XYZ])$", "Std. dev. of \\1 - \\2 direction", variable_labels)
+variable_labels <- gsub("Mag$", " - Magnitude", variable_labels)
+
+variable_labels <- gsub("tBodyAcc ", "body acceleration signal ", variable_labels)
+variable_labels <- gsub("tGravityAcc ", "gravity acceleration signal ", variable_labels)
+variable_labels <- gsub("tBodyGyro ", "body gyroscope signal ", variable_labels)
+
+variable_labels <- gsub("tBodyAccJerk ", "body acceleration jerk signal ", variable_labels)
+variable_labels <- gsub("tBodyGyroJerk ", "body gyroscope jerk signal ", variable_labels)
+
+variable_labels <- gsub("fBodyAcc ", "body acceleration signal - frequency domain ", variable_labels)
+variable_labels <- gsub("fBodyGyro ", "body gyroscope signal - frequency domain ", variable_labels)
+variable_labels <- gsub("fBodyAccJerk ", "body acceleration jerk signal - frequency domain ", variable_labels)
+variable_labels <- gsub("fBodyGyroJerk ", "body gyroscope jerk signal - frequency domain ", variable_labels)
+
+variable_labels <- gsub("fBodyBodyAccJerk ", "body acceleration jerk signal - frequency domain ", variable_labels)
+variable_labels <- gsub("fBodyBodyGyro ", "body gyroscope signal - frequency domain ", variable_labels)
+variable_labels <- gsub("fBodyBodyGyroJerk ", "body gyroscope jerk signal - frequency domain ", variable_labels)
+```
