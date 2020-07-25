@@ -6,6 +6,10 @@ features <- read.table("./UCI HAR Dataset/features.txt")
 activities <- read.table("./UCI HAR Dataset/activity_labels.txt")
 activities <- rename(activities, activity_id = V1, activity = V2)
 
+# make activity labels readable by changing to lowercase and replacing underscores with spaces. 
+activities$activity <- gsub("_", " ", tolower(activities$activity))
+
+
 X_train <- read.table("./UCI HAR Dataset/train/X_train.txt")
 y_train <- read.table("./UCI HAR Dataset/train/y_train.txt")
 subject_train <- read.table("./UCI HAR Dataset/train/subject_train.txt")
@@ -30,7 +34,35 @@ names <- features[, 2]
 means_and_stds <- grep("mean\\(\\)|std\\(\\)", names)
 
 X_selected <- select(X_merged, all_of(means_and_stds))
-names(X_selected) <- features[means_and_stds, 2]
+
+variable_labels1 <- features[means_and_stds, 2]
+variable_labels <- variable_labels1
+
+variable_labels <- gsub("^(.*)-mean\\(\\)$", "Mean of \\1", variable_labels)
+variable_labels <- gsub("^(.*)-std\\(\\)$", "Std. dev. of \\1", variable_labels)
+variable_labels <- gsub("^(.*)-mean\\(\\)-([XYZ])$", "Mean of \\1 - \\2 direction", variable_labels)
+variable_labels <- gsub("^(.*)-std\\(\\)-([XYZ])$", "Std. dev. of \\1 - \\2 direction", variable_labels)
+variable_labels <- gsub("Mag$", " - Magnitude", variable_labels)
+
+variable_labels <- gsub("tBodyAcc ", "body acceleration signal ", variable_labels)
+variable_labels <- gsub("tGravityAcc ", "gravity acceleration signal ", variable_labels)
+variable_labels <- gsub("tBodyGyro ", "body gyroscope signal ", variable_labels)
+
+variable_labels <- gsub("tBodyAccJerk ", "body acceleration jerk signal ", variable_labels)
+variable_labels <- gsub("tBodyGyroJerk ", "body gyroscope jerk signal ", variable_labels)
+
+variable_labels <- gsub("fBodyAcc ", "body acceleration signal - frequency domain ", variable_labels)
+variable_labels <- gsub("fBodyGyro ", "body gyroscope signal - frequency domain ", variable_labels)
+variable_labels <- gsub("fBodyAccJerk ", "body acceleration jerk signal - frequency domain ", variable_labels)
+variable_labels <- gsub("fBodyGyroJerk ", "body gyroscope jerk signal - frequency domain ", variable_labels)
+
+variable_labels <- gsub("fBodyBodyAccJerk ", "body acceleration jerk signal - frequency domain ", variable_labels)
+variable_labels <- gsub("fBodyBodyGyro ", "body gyroscope signal - frequency domain ", variable_labels)
+variable_labels <- gsub("fBodyBodyGyroJerk ", "body gyroscope jerk signal - frequency domain ", variable_labels)
+
+
+names(X_selected) <- variable_labels
+
 
 AugmentedDF <- cbind(subject = subject_merged, activity = y_labeled$activity, X_selected)
 
