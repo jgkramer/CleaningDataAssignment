@@ -1,3 +1,4 @@
+
 library(dplyr)
 library(tidyr)
 
@@ -74,16 +75,15 @@ variable_labels <- gsub("fBodyBodyAccJerk ", "body acceleration jerk signal - fr
 variable_labels <- gsub("fBodyBodyGyro ", "body gyroscope signal - frequency domain ", variable_labels)
 variable_labels <- gsub("fBodyBodyGyroJerk ", "body gyroscope jerk signal - frequency domain ", variable_labels)
 
+# Assign the cleaned-up feature names as column headers to the X data table (prior to adding in activity and subject columns)
 names(X_selected) <- variable_labels
+
+# complete the data set by adding columns for subject, and the activity (decsriptive label only, not the ID)
 CompleteDF <- cbind(subject = subject_merged, activity = y_labeled$activity, X_selected)
 
-##GatheredDF <- pivot_longer(AugmentedDF, cols = -c(subject, activity), names_to = "feature", values_to = "measurement")
 
-##GroupedDF <- 
-##  GatheredDF %>%
-##  group_by(subject, activity, feature) %>%
-##  summarise(mean = mean(measurement))
-
+# creates a tidy data set grouped (1) subject, and (2) activity
+# for each subject/activity pair, report the mean of each variable. 
 GroupedDF <- 
   CompleteDF %>%
   group_by(subject, activity) %>%
