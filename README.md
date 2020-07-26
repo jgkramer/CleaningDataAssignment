@@ -119,18 +119,25 @@ The next section of the script manipulates the text of the feature labels to mak
 As we did with the columns of the "X" data set, I extract only the 66 rows from the feature table representing mean or standard deviations. 
 
 ```{r message = FALSE, warning = FALSE}
-
 variable_labels <- features[means_and_stds, 2]
 ```
 
+The following code upacks the densely named feature labels and makes them more descriptive, by using regular expression substitution via `gsub`. 
 
+These substitutions rewrite feature names ending with "....mean()" or "....std()" by as names STARTING with "Mean of ..." or "Std. Dev. of".  
+In addition, for any variable ending with X, Y or Z (the axes of measurement) or Mag, the name is rewritten to end with "X direction", "Y direction", "Z direction" or "Magnitude", respectively.
 
+```{r message = FALSE, warning = FALSE}
 variable_labels <- gsub("^(.*)-mean\\(\\)$", "Mean of \\1", variable_labels)
 variable_labels <- gsub("^(.*)-std\\(\\)$", "Std. dev. of \\1", variable_labels)
 variable_labels <- gsub("^(.*)-mean\\(\\)-([XYZ])$", "Mean of \\1 - \\2 direction", variable_labels)
 variable_labels <- gsub("^(.*)-std\\(\\)-([XYZ])$", "Std. dev. of \\1 - \\2 direction", variable_labels)
 variable_labels <- gsub("Mag$", " - Magnitude", variable_labels)
+```
 
+Finally, I unpack the densely abbreviated multiple word descriptors of the type of signal measured into complete words, turning, for example "tBodyAcc" into "body acceleration signal", and so forth. 
+
+```{r message = FALSE, warning = FALSE}
 variable_labels <- gsub("tBodyAcc ", "body acceleration signal ", variable_labels)
 variable_labels <- gsub("tGravityAcc ", "gravity acceleration signal ", variable_labels)
 variable_labels <- gsub("tBodyGyro ", "body gyroscope signal ", variable_labels)
@@ -147,3 +154,13 @@ variable_labels <- gsub("fBodyBodyAccJerk ", "body acceleration jerk signal - fr
 variable_labels <- gsub("fBodyBodyGyro ", "body gyroscope signal - frequency domain ", variable_labels)
 variable_labels <- gsub("fBodyBodyGyroJerk ", "body gyroscope jerk signal - frequency domain ", variable_labels)
 ```
+
+Finally, with the variable names cleaned up, I apply these as the column names of the selected X data set. 
+I then combine this column-wise with the subject data set, and the descriptive activity labels, to create the FULL data set, containing columns for each obseravtion of subject, activity label, and all 66 measured signals. 
+
+```{r message = FALSE, warning = FALSE}
+names(X_selected) <- variable_labels
+CompleteDF <- cbind(subject = subject_merged, activity = y_labeled$activity, X_selected)
+```
+
+### 5. 

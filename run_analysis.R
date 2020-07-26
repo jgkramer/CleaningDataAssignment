@@ -75,9 +75,7 @@ variable_labels <- gsub("fBodyBodyGyro ", "body gyroscope signal - frequency dom
 variable_labels <- gsub("fBodyBodyGyroJerk ", "body gyroscope jerk signal - frequency domain ", variable_labels)
 
 names(X_selected) <- variable_labels
-
-AugmentedDF <- cbind(subject = subject_merged, activity = y_labeled$activity, X_selected)
-
+CompleteDF <- cbind(subject = subject_merged, activity = y_labeled$activity, X_selected)
 
 ##GatheredDF <- pivot_longer(AugmentedDF, cols = -c(subject, activity), names_to = "feature", values_to = "measurement")
 
@@ -87,6 +85,7 @@ AugmentedDF <- cbind(subject = subject_merged, activity = y_labeled$activity, X_
 ##  summarise(mean = mean(measurement))
 
 GroupedDF <- 
-  AugmentedDF %>%
+  CompleteDF %>%
   group_by(subject, activity) %>%
   summarise_all(mean)
+
