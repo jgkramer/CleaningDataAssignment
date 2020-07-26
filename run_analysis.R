@@ -89,3 +89,7 @@ GroupedDF <-
   group_by(subject, activity) %>%
   summarise_all(mean)
 
+
+write.table(GroupedDF, file = "output.txt", row.names = FALSE)
+
+GroupedDF

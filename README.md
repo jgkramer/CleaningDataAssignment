@@ -164,4 +164,3 @@ GroupedDF <-
 I do acknowledge that another potential interpretation of a "tidy" data set would have been to melt the `CompleteDF` data frame and treat (1) subject, (2) activity and (3) signal name corresponding to the column name in CompleteDF (for which a value could be "Mean of Body Acceleration - X Direction")", and then (4) the observed numerical value.   This would be a narrow / tall data set with only 4 columns (only one numerical value per row).
 
 
-
