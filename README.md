@@ -169,7 +169,7 @@ I do acknowledge that another potential interpretation of a "tidy" data set woul
 Finally, this final data frame is output to a text file via `write.table`.   The code below will read it in. 
 
 ```{r message = FALSE, warning = FALSE}
-testDF = read.table(file = "output.txt", header = TRUE)
+testDF <- read.table(file = "output.txt", header = TRUE)
 ```
 
 Credit to the article at https://thoughtfulbloke.wordpress.com/2015/09/09/getting-and-cleaning-the-assignment/ for helping organize my thoughts around this assignment. 
