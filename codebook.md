@@ -126,7 +126,6 @@ The mean and standard deviation of the magnitude of the three-dimensional gravit
 Normalized and bounded within the range [-1, 1].
 
 
-
 37. Mean of body acceleration jerk signal - Magnitude                     
 38. Std. dev. of body acceleration jerk signal - Magnitude
 
@@ -151,33 +150,101 @@ The mean and standard deviation of the magnitude of the body three-dimensional a
 Normalized and bounded within the range [-1, 1].
 
 
+43. Mean of body acceleration signal - frequency domain - X direction
+44. Mean of body acceleration signal - frequency domain - Y direction
+45. Mean of body acceleration signal - frequency domain - Z direction
 
 
-[43] "Mean of body acceleration signal - frequency domain - X direction"          
-[44] "Mean of body acceleration signal - frequency domain - Y direction"          
-[45] "Mean of body acceleration signal - frequency domain - Z direction"          
-[46] "Std. dev. of body acceleration signal - frequency domain - X direction"     
-[47] "Std. dev. of body acceleration signal - frequency domain - Y direction"     
-[48] "Std. dev. of body acceleration signal - frequency domain - Z direction"     
-[49] "Mean of body acceleration jerk signal - frequency domain - X direction"     
-[50] "Mean of body acceleration jerk signal - frequency domain - Y direction"     
-[51] "Mean of body acceleration jerk signal - frequency domain - Z direction"     
-[52] "Std. dev. of body acceleration jerk signal - frequency domain - X direction"
-[53] "Std. dev. of body acceleration jerk signal - frequency domain - Y direction"
-[54] "Std. dev. of body acceleration jerk signal - frequency domain - Z direction"
-[55] "Mean of body gyroscope signal - frequency domain - X direction"             
-[56] "Mean of body gyroscope signal - frequency domain - Y direction"             
-[57] "Mean of body gyroscope signal - frequency domain - Z direction"             
-[58] "Std. dev. of body gyroscope signal - frequency domain - X direction"        
-[59] "Std. dev. of body gyroscope signal - frequency domain - Y direction"        
-[60] "Std. dev. of body gyroscope signal - frequency domain - Z direction"        
-[61] "Mean of body acceleration signal - frequency domain - Magnitude"            
-[62] "Std. dev. of body acceleration signal - frequency domain - Magnitude"       
-[63] "Mean of body acceleration jerk signal - frequency domain - Magnitude"       
-[64] "Std. dev. of body acceleration jerk signal - frequency domain - Magnitude"  
-[65] "Mean of body gyroscope signal - frequency domain - Magnitude"               
-[66] "Std. dev. of body gyroscope signal - frequency domain - Magnitude"          
-[67] "Mean of body gyroscope jerk signal - frequency domain - Magnitude"          
-[68] "Std. dev. of body gyroscope jerk signal - frequency domain - Magnitude"   
+These variables are derived from the phone's accelerometer, and represent the mean of the acceleration signals of the subject's body (as separated out from the gravity component of acceleration); same signals as data in items 3, 4, 5 above, but converted into frequency domain using Fast Fourier Transform (FFT).  
+
+Each of X direction, Y direction, and Z direction, represent the acceleration in the direction of the specified X, Y or Z axis. 
+
+Normalized and bounded within range [-1, 1]
+
+
+46.  Std. dev. of body acceleration signal - frequency domain - X direction
+47.  Std. dev. of body acceleration signal - frequency domain - Y direction
+48.  Std. dev. of body acceleration signal - frequency domain - Z direction
+
+Standard deviation of the body acceleration variable signals, converted into the frequency domain using FFT. 
+
+Normalized and bounded within range [-1, 1]
+
+
+49. Mean of body acceleration jerk signal - frequency domain - X direction
+50. Mean of body acceleration jerk signal - frequency domain - Y direction
+51. Mean of body acceleration jerk signal - frequency domain - Z direction
+
+These variables are derived from the phone's accelerometer, and represent the mean of the "acceleration jerk" of the subject's body -- i.e., the derivative of acceleration with respect to time (second derivative of velocity) -- same signals as data in items 15, 16, 17 above, but converted into frequency domain using Fast Fourier Transform (FFT).  
+
+Each of X direction, Y direction, and Z direction, represent the acceleration jerk in the direction of the specified X, Y or Z axis. 
+
+Normalized and bounded within range [-1, 1]
+
+
+52.  Std. dev. of body acceleration jerk signal - frequency domain - X direction
+53.  Std. dev. of body acceleration jerk signal - frequency domain - Y direction
+54.  Std. dev. of body acceleration jerk signal - frequency domain - Z direction
+
+
+Standard deviation of the body acceleration jerk variable signals, converted into the frequency domain using FFT. 
+
+Normalized and bounded within range [-1, 1]
+
+
+55.  Mean of body gyroscope signal - frequency domain - X direction
+56.  Mean of body gyroscope signal - frequency domain - Y direction             
+57.  Mean of body gyroscope signal - frequency domain - Z direction
+
+
+These variables are derived from the phone's gyroscope, and represent the mean of the angular velocity signals of the subject's body -- same as variables in 21, 22, 23 -- but converted into frequency domain using Fast Fourier Transform (FFT). 
+
+Each of X direction, Y direction, and Z direction, represent the angular velocity in the direction of the specified X, Y or Z axis. 
+
+Normalized and bounded within the range [-1, 1].
+
+
+58. Std. dev. of body gyroscope signal - frequency domain - X direction        
+59. Std. dev. of body gyroscope signal - frequency domain - Y direction        
+60. Std. dev. of body gyroscope signal - frequency domain - Z direction
+
+
+Standard deviation of the body angular velocity variable signals, converted into the frequency domain using FFT. 
+
+Normalized and bounded within range [-1, 1]
+
+
+61. Mean of body acceleration signal - frequency domain - Magnitude        
+62. Std. dev. of body acceleration signal - frequency domain - Magnitude  
+
+
+The mean and standard deviation of the magnitude of the three-dimensional body component of acceleration signals, calculated using the Euclidean norm.  Signals converted into frequency domain using FFT. 
+
+Normalized and bounded within the range [-1, 1].
+
+
+
+63. Mean of body acceleration jerk signal - frequency domain - Magnitude
+64. Std. dev. of body acceleration jerk signal - frequency domain - Magnitude  
+
+The mean and standard deviation of the magnitude of the body three-dimensional "acceleration jerk" signals, calculated using the Euclidean norm.  Signals converted into frequency domain using FFT. 
+
+Normalized and bounded within the range [-1, 1].
+
+
+
+65. Mean of body gyroscope signal - frequency domain - Magnitude               
+66. Std. dev. of body gyroscope signal - frequency domain - Magnitude      
+
+
+The mean and standard deviation of the magnitude of the body three-dimensional angular velocity signals, calculated using the Euclidean norm.  Signals converted into frequency domain using FFT. 
+
+Normalized and bounded within the range [-1, 1].
+
+
+67. Mean of body gyroscope jerk signal - frequency domain - Magnitude
+68. Std. dev. of body gyroscope jerk signal - frequency domain - Magnitude
+
+The mean and standard deviation of the magnitude of the body three-dimensional angular velocity "jerk" signals, calculated using the Euclidean norm.  Signals converted into frequency domain using FFT. 
 
 
