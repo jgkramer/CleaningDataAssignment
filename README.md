@@ -166,7 +166,7 @@ I do acknowledge that another potential interpretation of a "tidy" data set woul
 
 ### 6.  Final output. 
 
-Finally, this final data frame is output via write.table to a text file via `write.table`.   The code below will read it in. 
+Finally, this final data frame is output to a text file via `write.table`.   The code below will read it in. 
 
 ```{r message = FALSE, warning = FALSE}
 testDF = read.table(file = "output.txt", header = TRUE)
